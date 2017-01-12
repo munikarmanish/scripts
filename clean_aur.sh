@@ -30,17 +30,19 @@ YELLOW="\e[1;33m"
 
 h1 "Cleaning package files"
 for pkg in $pkgs; do
-    # Get the old package files (keep latest $n)
-    olds=$(ls -t $aur/$pkg-[0-9r][^a-z]*.pkg.tar.xz 2>/dev/null | tail -n +$(($n_pkg + 1)))
-    [[ "$olds" ]] || continue
+  # Get the old package files (keep latest $n)
+  olds=$(ls -t $aur/$pkg-[0-9r][^a-z]*.pkg.tar.xz 2>/dev/null | tail -n +$(($n_pkg + 1)))
+  [[ "$olds" ]] || continue
 
-    h2 "$pkg"
-    for old in $olds; do
-        h3 "$(basename $old)"
-        # Remove here
-        rm $old
-    done
+  h2 "$pkg"
+  for old in $olds; do
+    h3 "$(basename $old)"
+    # Remove here
+    rm $old
+  done
 
-    # remove all symlinks
-    ls -F $aur/$pkg | grep @$ | cut -d@ -f1 | xargs -I{} rm $aur/$pkg/{}
+  # remove all symlinks
+  ls -F $aur/$pkg | grep @$ | cut -d@ -f1 | xargs -I{} rm $aur/$pkg/{}
 done
+
+# vim:set tw=2 sw=2 et:

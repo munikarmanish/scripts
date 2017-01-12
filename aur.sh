@@ -23,7 +23,10 @@ for pkg in ${targets[@]}; do
   if yaourt -Sasq ${pkg} | grep "^${pkg}$" &>/dev/null; then
     # Check if package already exists
     pkgfile=$(package-query -A -f "%n-%V*.pkg.tar.xz" ${pkg})
-    if ls ${pkgdir}/${pkgfile} &>/dev/null; then continue; fi
+    if ls ${pkgdir}/${pkgfile} &>/dev/null; then
+      continue;
+      yaourt -U ${pkgfile}
+    fi
 
     # Make the package here
     cd ${aurdir}

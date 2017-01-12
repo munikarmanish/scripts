@@ -30,10 +30,10 @@ YELLOW="\e[1;33m"
 # Backup BCT files
 
 BCTDIR="/home/manish/bct"
-BCTBACKUPDIR="/E/bct"
+BCTBACKUPDIR="/mnt/backup/bct"
 
 h1 "Backing up BCT files..."
-rsync -ruvh --exclude='*.git/**' --exclude='**a.out' --delete-excluded \
+rsync -ruvh --exclude='**.git/**' --exclude='**a.out' --delete-excluded \
     $BCTDIR/ $BCTBACKUPDIR/ \
     | sed -e '/^skipping/d' -e '/^sending/d' -e '/^sent/d' -e '/^$/d'
 
@@ -41,7 +41,7 @@ rsync -ruvh --exclude='*.git/**' --exclude='**a.out' --delete-excluded \
 # Backup package files (NO NEED --- BECAUSE PACMAN ALREADY DOES IT --- SEE pacman.conf)
 #
 #PKGDIR="/var/cache/pacman/pkg"
-#PKGBACKUPDIR="/E/app/linux/pacman"
+#PKGBACKUPDIR="/mnt/backup/app/linux/pacman"
 #
 #h1 "Backing up pacman packages..."
 #rsync -ruvh --delete $PKGDIR/ $PKGBACKUPDIR/ \
@@ -51,7 +51,7 @@ rsync -ruvh --exclude='*.git/**' --exclude='**a.out' --delete-excluded \
 ## Backup AUR files (NO NEED --- BECAUSE YAOURT ALREADY DOES IT)
 #
 #AURDIR="/home/manish/aur"
-#AURBACKUPDIR="/E/app/linux/aur"
+#AURBACKUPDIR="/mnt/backup/app/linux/aur"
 #
 #h1 "Backing up AUR packages..."
 #rsync -ruvh --delete $AURDIR/ $AURBACKUPDIR/ \
@@ -61,7 +61,7 @@ rsync -ruvh --exclude='*.git/**' --exclude='**a.out' --delete-excluded \
 # Backup scripts
 
 BINDIR="/home/manish/bin"
-BINBACKUPDIR="/E/bin"
+BINBACKUPDIR="/mnt/backup/bin"
 
 h1 "Backing up scripts..."
 rsync -ruvh $BINDIR/ $BINBACKUPDIR/ \
@@ -71,7 +71,7 @@ rsync -ruvh $BINDIR/ $BINBACKUPDIR/ \
 # Backup images
 
 IMGDIR="/home/manish/img"
-IMGBACKUPDIR="/E/img"
+IMGBACKUPDIR="/mnt/backup/img"
 
 h1 "Backing up images..."
 rsync -ruvh $IMGDIR/ $IMGBACKUPDIR/ \
@@ -81,9 +81,9 @@ rsync -ruvh $IMGDIR/ $IMGBACKUPDIR/ \
 # Backup code
 
 CODEDIR="/home/manish/code"
-CODEBACKUPDIR="/E/code"
+CODEBACKUPDIR="/mnt/backup/code"
 
 h1 "Backing up codes..."
-rsync -ruvh $CODEDIR/ $CODEBACKUPDIR/ --exclude='**a.out' --delete-excluded\
+rsync -ruvh $CODEDIR/ $CODEBACKUPDIR/ --exclude='**.git/**' --exclude='**a.out' --delete-excluded\
     | sed -e '/^skipping/d' -e '/^sending/d' -e '/^sent/d' -e '/^$/d'
 
