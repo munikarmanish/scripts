@@ -64,7 +64,7 @@ BINDIR="/home/manish/bin"
 BINBACKUPDIR="/mnt/backup/bin"
 
 h1 "Backing up scripts..."
-rsync -ruvh $BINDIR/ $BINBACKUPDIR/ \
+rsync -ruvh --exclude='**.git/**' --delete-excluded $BINDIR/ $BINBACKUPDIR/ \
     | sed -e '/^skipping/d' -e '/^sending/d' -e '/^sent/d' -e '/^$/d'
 
 
